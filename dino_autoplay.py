@@ -1,4 +1,4 @@
-\"\"\"Use an existing debuggable Chrome window, or open a normal window if none exists.\"\"\"
+"""Use an existing debuggable Chrome window, or open a normal window if none exists."""
 import ctypes
 import json
 import os
@@ -69,8 +69,8 @@ else:
     if tabs is None:
         raise RuntimeError(
             '检测到已有 Chrome 窗口，但它未开启远程调试，Chrome 不允许脚本接管该窗口。\\n'
-            '请先完全退出 Chrome，再用下面命令启动普通窗口，然后运行本脚本：\\n'
-            '"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe" '
+            '请先完全退出 Chrome，再用下面命令启动普通窗口，然后运行本脚本：\n'
+            '"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" '
             '--remote-debugging-port=9222 --remote-allow-origins=* chrome://dino'
         )
 
