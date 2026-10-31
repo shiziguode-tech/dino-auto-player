@@ -33,7 +33,6 @@ code = r'''(() => {
   let r; try { r = Runner.getInstance(); } catch (_) { return 'not ready'; }
   if (!r.tRex || !r.horizon) return 'not ready';
   if (window.__dinoBot) clearInterval(window.__dinoBot);
-  r.gameOver = function() {};
   const key = (type, code, name) => new KeyboardEvent(type, {keyCode: code, which: code, code: name, bubbles: true});
   if (!r.playing) { r.onKeyDown(key('keydown', 32, 'Space')); r.onKeyUp(key('keyup', 32, 'Space')); }
   window.__dinoBot = setInterval(() => {
@@ -44,7 +43,7 @@ code = r'''(() => {
     const distance = o.xPos - t.xPos;
     const speed = r.currentSpeed || 6;
     const bird = (o.typeConfig && o.typeConfig.type === 'pterodactyl');
-    const duck = bird && o.yPos < t.groundYPos - 5;
+    const duck = bird && o.yPos >= t.groundYPos - 23 && o.yPos < t.groundYPos - 5;
     const near = distance > -o.width - 30 && distance < Math.max(90, speed * 15);
     if (duck && near && !t.jumping) {
       if (!t.ducking) t.setDuck(true);
@@ -61,7 +60,7 @@ for attempt in range(50):
         result = json.loads(ws.recv())
         if result.get('id') == 1: break
     if result.get('result', {}).get('result', {}).get('value') == 'started':
-        print('恐龙游戏已启动，自动跳跃和无敌模式已开启。')
+        print('恐龙游戏已启动，自动跳跃和飞鸟躲避已开启。')
         break
     time.sleep(.2)
 else:
